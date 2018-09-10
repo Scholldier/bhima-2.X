@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  
+
    <div class="row">
      <div class="col-md-5">
       <form
@@ -86,9 +86,14 @@
       </div>
 
       <div class="col-md-7">
-        <div class="panel panel-default">
-          <div class="panel-heading" translate>
-            CASHBOX.ACTIONS
+        <bh-cashbox-users cashbox="UpdateCtrl.box.id"></bh-cashbox-users>
+      </div>
+
+      <div class="col-md-7">
+        <div class="panel panel-warning">
+          <div class="panel-heading">
+            <i class="fa fa-exclamation-triangle"></i>
+            <span translate>CASHBOX.ACTIONS</span>
           </div>
           <div class="panel-body">
             <button class="btn btn-danger" type="button" ng-click="UpdateCtrl.remove(UpdateCtrl.box)" data-method="delete">

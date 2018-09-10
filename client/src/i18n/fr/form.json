@@ -114,7 +114,7 @@
             "MIN_CURRENCY_UNIT": "Cette valeur est trop petite pour la monnaie choisie.",
             "MISSING": "Informations manquantes",
             "MISSING_CASHBOX_ID": "Caisse non definie",
-            "MISSING_DEBTOR_ID": "Identifiant Debiteur manquant",
+            "MISSING_DEBTOR_ID": "Veuillez choisir d'abord un patient avant les factures",
             "RECORD_ERROR": "S'il vous plaît, veuiller résoudre les erreurs sur le formulaire. (Marqués en rouge)",
             "REQUIRED": "Cette valeur est requise.",
             "INVALID": "Donnees Invalides",
@@ -761,6 +761,7 @@
             "USER": "Selectionner Utilisateur",
             "VILLAGE": "Sélectionner Village/Commune",
             "WEEKEND_CONFIGURATION": "Sélectionner la configuration des weekends",
+            "WEEKEND_DAYS" : "Sélectionner le(s) jour(s) du weekend, (exemple : samedi et dimanche)",
             "ZS": "Sélectionner zone de sante"
         },
         "VALIDATION": {

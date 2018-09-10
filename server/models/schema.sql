@@ -1,3 +1,4 @@
+/* Database Schema Version 0.9.0 */
 SET foreign_key_checks = 0;
 
 SET names 'utf8mb4';
@@ -655,6 +656,7 @@ CREATE TABLE `enterprise_setting` (
   `enable_password_validation` TINYINT(1) NOT NULL DEFAULT 1,
   `enable_balance_on_invoice_receipt` TINYINT(1) NOT NULL DEFAULT 0,
   `enable_barcodes` TINYINT(1) NOT NULL DEFAULT 1,
+  `enable_auto_stock_accounting` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`enterprise_id`),
   FOREIGN KEY (`enterprise_id`) REFERENCES `enterprise` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4 DEFAULT COLLATE = utf8mb4_unicode_ci;
@@ -738,6 +740,7 @@ CREATE TABLE `general_ledger` (
   `fiscal_year_id`    MEDIUMINT(8) UNSIGNED DEFAULT NULL,
   `period_id`         MEDIUMINT(8) UNSIGNED DEFAULT NULL,
   `trans_id`          VARCHAR(100) NOT NULL,
+  `trans_id_reference_number` MEDIUMINT UNSIGNED NOT NULL,
   `trans_date`        DATETIME NOT NULL,
   `record_uuid`       BINARY(16) NOT NULL,
   `description`       TEXT NOT NULL,
@@ -770,6 +773,7 @@ CREATE TABLE `general_ledger` (
   INDEX `reference_uuid` (`record_uuid`),
   INDEX `entity_uuid` (`entity_uuid`),
   INDEX `account_id` (`account_id`),
+  INDEX `trans_id_reference_number` (`trans_id_reference_number`),
   FOREIGN KEY (`fiscal_year_id`) REFERENCES `fiscal_year` (`id`),
   FOREIGN KEY (`period_id`) REFERENCES `period` (`id`),
   FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON UPDATE CASCADE,
@@ -1294,6 +1298,7 @@ CREATE TABLE `posting_journal` (
   `fiscal_year_id`    MEDIUMINT(8) UNSIGNED DEFAULT NULL,
   `period_id`         MEDIUMINT(8) UNSIGNED DEFAULT NULL,
   `trans_id`          VARCHAR(100) NOT NULL,
+  `trans_id_reference_number` MEDIUMINT UNSIGNED NOT NULL,
   `trans_date`        DATETIME NOT NULL,
   `record_uuid`       BINARY(16) NOT NULL,
   `description`       TEXT,
@@ -1326,6 +1331,7 @@ CREATE TABLE `posting_journal` (
   INDEX `reference_uuid` (`record_uuid`),
   INDEX `entity_uuid` (`entity_uuid`),
   INDEX `account_id` (`account_id`),
+  INDEX `trans_id_reference_number` (`trans_id_reference_number`),
   FOREIGN KEY (`fiscal_year_id`) REFERENCES `fiscal_year` (`id`),
   FOREIGN KEY (`period_id`) REFERENCES `period` (`id`),
   FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON UPDATE CASCADE,
@@ -1730,7 +1736,6 @@ CREATE TABLE `user` (
   `email`         VARCHAR(100) DEFAULT NULL,
   `active`        TINYINT(4) NOT NULL DEFAULT 0,
   `deactivated`   TINYINT(1) NOT NULL DEFAULT 0,
-  `pin`           CHAR(4) NOT NULL DEFAULT 0,
   `last_login`    TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_1` (`username`)
